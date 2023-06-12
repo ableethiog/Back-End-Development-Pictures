@@ -35,7 +35,7 @@ def count():
 ######################################################################
 @app.route("/picture", methods=["GET"])
 def get_pictures():
-    pass
+    return jsonify(data), 200
 
 ######################################################################
 # GET A PICTURE
@@ -44,20 +44,23 @@ def get_pictures():
 
 @app.route("/picture/<int:id>", methods=["GET"])
 def get_picture_by_id(id):
-    pass
+    picture = next((picture for picture in data if picture['id'] == id), None)
+    if picture:
+        return jsonify(picture), 200
+    else:
+        return {"message": "Picture not found"}, 404
 
 
 ######################################################################
 # CREATE A PICTURE
 ######################################################################
-@app.route("/picture", methods=["POST"])
-def create_picture():
+@app.route("/picture/<int:id>", methods=["POST"])
+def create_picture(id):
     pass
 
 ######################################################################
 # UPDATE A PICTURE
 ######################################################################
-
 
 @app.route("/picture/<int:id>", methods=["PUT"])
 def update_picture(id):
